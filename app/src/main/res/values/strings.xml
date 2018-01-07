@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Gni-Transport</string>
+    <string name="publictopic">Gni</string>
+    <string name="searcherror">Nodeatils found</string>
+    <string name="nointernet">No Internet Connection</string>
+    <string name="Authkey">AmkjhTXVIO098765#$%bnmvQWESA</string>
+    <string name="routenumbertext">RouteNumber</string>
+    <string name="via">Via</string>
+    <string name="fullroute">FullRoute</string>
+    <string name="Setasdefaultroute">PrimaryRoute</string>
+    <string name="sure">By setting this as your primary route, you will be able to
+    receive update notification for this particular root</string>
+    <string name="proceed">Proceed</string>
+    <string name="searcherrorselecting">ErrorSelecting</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="complaint_text">please_tell_your_concer</string>
+    <string name="complaint_title">Complaint Title</string>
+    <string name="complaint_description">complaint desccription</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_college_map">Map</string>
+    <string name="submit">Submit</string>
+    <string name="notitle">please enter title</string>
+    <string name="tryagainlater">Try again later</string>
+</resources>
