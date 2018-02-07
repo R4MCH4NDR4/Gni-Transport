@@ -3,7 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="@string/delete"
+        app:showAsAction="never"
+        android:orderInCategory="100"/>
+    <item  android:id="@+id/refresh"
+        android:title="@string/refresh"
+        android:icon="@drawable/refresh"
+        app:showAsAction="ifRoom"
+        />
+    <item android:id="@+id/call"
+        android:title="@string/phone"
+        android:icon="@drawable/call"
+        app:showAsAction="ifRoom">
+    </item>
 </menu>

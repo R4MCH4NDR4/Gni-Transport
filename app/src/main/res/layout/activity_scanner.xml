@@ -6,11 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.root.gni_transport.gni.ui.activities.Scanner">
 
-        <FrameLayout
-            android:id="@+id/content_frame"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_gravity="top"
@@ -18,5 +13,18 @@
             android:background="#a1a1a1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/scan_your_id_card"
+            android:gravity="center"
+            android:textSize="25sp"
+          />
+
+        <FrameLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
 
 </FrameLayout>

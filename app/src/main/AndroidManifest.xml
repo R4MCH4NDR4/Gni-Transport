@@ -17,32 +17,36 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/gni"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/gni"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.root.gni_transport.gni.ui.activities.MainActivity">
+        <activity
+            android:name=".gni.ui.activities.MainActivity"
+            android:label="Primary Route">
+
+            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            -->
         </activity>
 
-        <service android:name="com.example.root.gni_transport.gni.firebase.FirebasewMessage">
+        <service android:name=".gni.firebase.FirebasewMessage">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name="com.example.root.gni_transport.gni.firebase.Firebaseinstanceid">
+        <service android:name=".gni.firebase.Firebaseinstanceid">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
         <activity
-            android:name="com.example.root.gni_transport.gni.ui.activities.HomeActivity"
+            android:name=".gni.ui.activities.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -51,11 +55,46 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name="com.example.root.gni_transport.gni.ui.activities.CollegeMap"
-            android:label="@string/title_activity_college_map" />
-        <activity android:name="com.example.root.gni_transport.gni.ui.activities.Scanner" />
-        <activity android:name="com.example.root.gni_transport.gni.ui.activities.Complaints" />
-        <activity android:name="com.example.root.gni_transport.gni.ui.activities.Notification"></activity>
+            android:name=".gni.ui.activities.CollegeMap"
+            android:label="College Map"
+            android:parentActivityName=".gni.ui.activities.HomeActivity" />
+        <activity
+            android:name=".gni.ui.activities.Scanner"
+            android:label="Scan Id Card"
+            android:parentActivityName=".gni.ui.activities.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gni.ui.activities.Complaints"
+            android:label="complaints"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gni.ui.activities.NoticeActivity"
+            android:label="Notifications"
+            android:parentActivityName=".gni.ui.activities.HomeActivity"
+            android:screenOrientation="portrait">
+            <intent-filter android:name="com.example.root.gni_transport_NOTIFICATION_TARGET">
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".gni.ui.activities.All_Routes"
+            android:label="All Routes"
+            android:parentActivityName=".gni.ui.activities.HomeActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".gni.ui.activities.Intro"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Intro">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".gni.ui.activities.RouteMapAtivity"
+            android:label="@string/title_activity_route_map_ativity">
+        </activity>
     </application>
 
 </manifest>

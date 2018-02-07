@@ -6,7 +6,7 @@ import android.util.Base64;
 import android.util.Log;
 
 /**
- * Created by root on 2/1/18.
+ * Created by ram on 2/1/18.
  */
 
 public class Sharedpref {
@@ -22,12 +22,10 @@ public class Sharedpref {
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-
     public Sharedpref(Context context)
     {
         this.context=context;
         sharedPreferences=context.getSharedPreferences(mypref,Context.MODE_PRIVATE);
-
     }
     public  String encode(String value){
         if(value!=null){
@@ -48,7 +46,7 @@ public class Sharedpref {
     public void setFcmtoken(String token){
         editor=sharedPreferences.edit();
         editor.putString(fcmtoken,encode(token));
-        editor.commit();
+        editor.apply();
     }
 
     public String getFcmtoken()
@@ -60,7 +58,7 @@ public class Sharedpref {
         Log.d("SHAREDPREFERID",value);
         editor=sharedPreferences.edit();
         editor.putString(routeFcmId,encode(value));
-        editor.commit();
+        editor.apply();
 
     }
     public  String getRouteFcmId() {
@@ -71,7 +69,7 @@ public class Sharedpref {
         Log.d("SHAREDPREFNUMBER",value);
         editor=sharedPreferences.edit();
         editor.putString(routenumber,encode(value));
-        editor.commit();
+        editor.apply();
     }
     public  String getRoutenumber() {
         String value=sharedPreferences.getString(routenumber,null);
@@ -84,13 +82,13 @@ public class Sharedpref {
     public void setFirstopen(){
         editor=sharedPreferences.edit();
         editor.putBoolean(firstopen,true);
-        editor.commit();
+        editor.apply();
     }
 
     public void setRouteselected(){
         editor=sharedPreferences.edit();
         editor.putBoolean(Routeselected,true);
-        editor.commit();
+        editor.apply();
     }
 
     public  String getRollNumber() {
@@ -104,6 +102,12 @@ public class Sharedpref {
     }
 
     public boolean getRouteselected() {
+
         return sharedPreferences.getBoolean(Routeselected,false);
+    }
+    public void delete(){
+        editor=sharedPreferences.edit();
+        editor.clear();
+        editor.commit();
     }
 }

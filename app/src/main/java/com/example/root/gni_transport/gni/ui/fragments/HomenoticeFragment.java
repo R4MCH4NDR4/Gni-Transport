@@ -30,9 +30,9 @@ public class HomenoticeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         sharedpref =new Sharedpref(getContext());
-        View view=inflater.inflate(R.layout.fragment_homemap,container,false);
-        textView=(TextView)view.findViewById(R.id.textView);
-        textView.setText(sharedpref.getRoutenumber());
+        View view=inflater.inflate(R.layout.fragment_homenotice,container,false);
+       // textView=(TextView)view.findViewById(R.id.textView);
+        //textView.setText(sharedpref.getRoutenumber());
        // return inflater.inflate(R.layout.fragment_homenotice, container, false);
         return view;
     }

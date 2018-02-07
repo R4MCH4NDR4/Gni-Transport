@@ -43,11 +43,11 @@ public class Complaints extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaints);
         ButterKnife.bind(this);
-        Bundle bundle=getIntent().getExtras();
+        //Bundle bundle=getIntent().getExtras();
        // Rollnumber=bundle.getString("number");
          loadToast=new LoadToast(this);
-         Bundle bundle1=getIntent().getExtras();
-         rollnumber=bundle.getString("scannervalue");
+         Bundle bundle=getIntent().getExtras();
+         rollnumber =bundle.getString("scannervalue");
          submit.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
@@ -66,6 +66,7 @@ public class Complaints extends AppCompatActivity {
              }
          });
     }public  void submitComplaint(final String title, String subject){
+        submit.setEnabled(false);
         String url= Contants.complaints;
         AndroidNetworking.post(url)
                 .setPriority(Priority.HIGH)
@@ -77,8 +78,8 @@ public class Complaints extends AppCompatActivity {
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        loadToast.success();
                         if(response.length()>0)
-                            loadToast.success();
                         Log.d("RESPONSE",response.toString());
                         if(!response.has("Error")){
                             Toast.makeText(getApplicationContext(),
@@ -104,5 +105,6 @@ public class Complaints extends AppCompatActivity {
     public  void showerror(){
             Snackbar.make(title,getString(R.string.tryagainlater),
                     Snackbar.LENGTH_INDEFINITE).show();
+            //loadToast.hide();
     }
 }

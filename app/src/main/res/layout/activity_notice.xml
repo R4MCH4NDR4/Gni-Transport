@@ -4,27 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/rv"
-    tools:context="com.example.root.gni_transport.gni.ui.activities.Notification">
+    tools:context="com.example.root.gni_transport.gni.ui.activities.NoticeActivity">
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/notification_recycle">
+        android:id="@+id/notice_recycle"
+        android:scrollbars="vertical">
     </android.support.v7.widget.RecyclerView>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/rv1"
-        android:gravity="center"
-        android:visibility="gone">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:id="@+id/textView"
-            android:textSize="25sp"
-            android:text="No details found"/>
-
+        android:layout_height="match_parent"
+        android:id="@+id/rv1">
     </RelativeLayout>
 
 </RelativeLayout>

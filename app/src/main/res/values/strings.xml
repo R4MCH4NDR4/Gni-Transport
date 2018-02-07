@@ -13,10 +13,8 @@
     <string name="proceed">Proceed</string>
     <string name="searcherrorselecting">ErrorSelecting</string>
     <string name="title_activity_home">HomeActivity</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
     <string name="complaint_text">please_tell_your_concer</string>
     <string name="complaint_title">Complaint Title</string>
@@ -28,4 +26,33 @@
     <string name="submit">Submit</string>
     <string name="notitle">please enter title</string>
     <string name="tryagainlater">Try again later</string>
+    <string name="Error">Error</string>
+    <string name="Fullroute">Full Route</string>
+    <string name="delete">Delete primary route</string>
+    <string name="deletemessage">If you delete this primary route,you are no loger to receive
+    any notification from these route</string>
+    <string name="calltotransport">Call to Transport Dept</string>
+    <string name="transportmessage">Call in case of emergency</string>
+    <string name="noticeboard">Notice Board</string>
+    <string name="primaryroute">Primary Route Details</string>
+    <string name="welcome">Welcome</string>
+    <string name="title_activity_route_map_ativity">Map</string>
+    <string name="scan_your_id_card">Scan your id card</string>
+    <string name="busnumber">AP10Z2547</string>
+    <string name="bus_number">Bus Number :</string>
+    <string name="time">Time :</string>
+    <string name="subject">subject :</string>
+    <string name="title">Title :</string>
+    <string name="updates">Updates</string>
+    <string name="gni_transport">Gni-Transport</string>
+    <string name="all_routes">All Routes</string>
+    <string name="complaints">Complaints</string>
+    <string name="notifications">Notifications</string>
+    <string name="college_map">College Map</string>
+    <string name="routemap">RouteMap</string>
+    <string name="bugreport">BugReport</string>
+    <string name="about">About</string>
+    <string name="refresh">refresh</string>
+    <string name="phone">phone</string>
+    <string name="todo">TODO</string>
 </resources>

@@ -13,6 +13,8 @@ import android.widget.RelativeLayout;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
+import com.androidnetworking.interceptors.GzipRequestInterceptor;
+import com.androidnetworking.interceptors.HttpLoggingInterceptor;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.root.gni_transport.R;
 
@@ -22,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -35,14 +38,21 @@ import com.example.root.gni_transport.gni.utils.Conection;
 import com.example.root.gni_transport.gni.utils.Contants;
 import com.example.root.gni_transport.gni.utils.Sharedpref;
 
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static com.example.root.gni_transport.gni.utils.Contants.Allroutes;
 
 public class MainActivity extends AppCompatActivity {
-    OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-            .connectTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(120, TimeUnit.SECONDS)
-            .writeTimeout(120, TimeUnit.SECONDS)
-            .build();
+   /* OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+            .connectTimeout(100, TimeUnit.SECONDS)
+            .readTimeout(100, TimeUnit.SECONDS)
+            .writeTimeout(100, TimeUnit.SECONDS)
+            //.addNetworkInterceptor(new GzipRequestInterceptor())
+            .build();*/
     @BindView(R.id.rv)
     RelativeLayout rv;
     @BindView(R.id.route_select_recycle)
@@ -74,8 +84,10 @@ public class MainActivity extends AppCompatActivity {
             if(sharedpref.getRouteselected()){
                 startActivity(new Intent(getApplicationContext(),HomeActivity.class));
                 finish();
+            }else {
+                Intent intent = new Intent(this,MainActivity.class);
             }
-            loadToast.show();
+            //loadToast.show();
             getAllroutedetails();
         } else {
             recyclerView.setVisibility(View.GONE);
@@ -86,18 +98,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getAllroutedetails() {
-        String url = contants.Allroutes;
+        String url = Allroutes;
         Log.d("ALL_ROUTE_URL", url);
+        String u ="http://192.168.0.6/project_php/All_routes.php";
         AndroidNetworking.post(url)
                 .addBodyParameter("Authkey", getString(R.string.Authkey))
-                .setOkHttpClient(okHttpClient)
+                //.setOkHttpClient(okHttpClient)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        Log.d("TAGGGGG", response.toString());
                         loadToast.success();
-                        Log.d("TAGGG", response.toString());
+                        Log.d("TAGGGGG", response.toString());
                         if (!response.has(getString(R.string.searcherrorselecting))) {
                             try {
                                 JSONArray jsonArray = response.getJSONArray("Routes");
@@ -136,12 +150,11 @@ public class MainActivity extends AppCompatActivity {
                             searcherror.setVisibility(View.VISIBLE);
 
                         }
-
-
                     }
 
                     @Override
                     public void onError(ANError anError) {
+                        anError.printStackTrace();
                         Log.d("LOADERROR", anError.toString());
                         loadToast.error();
                         showError();
@@ -151,9 +164,70 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+      /* public void getAllroutedetails(){
+       String u=contants.Allroutes;
+       Log.d("URLLL",u);
+       OkHttpClient client =new OkHttpClient();
+       final Request request=new Request.Builder()
+               .url(u)
+               .build();
+       client.newCall(request).enqueue(new Callback() {
+           @Override
+           public void onFailure(Call call, IOException e) {
+               e.printStackTrace();
+               Log.d("ERROORR",e.toString());
+               call.cancel();
+
+           }
+
+           @Override
+           public void onResponse(Call call, Response response) throws IOException {
+               loadToast.success();
+               Log.d("RESPONSEE",response.toString());
+               if(response.equals("ErrorSelecting")){
+                   showError();
+               }else {
+                   String myresponce= response.body().string();
+                   Log.d("AAAAA",myresponce);
+                   try {
+                       JSONObject object =new JSONObject(myresponce);
+                       JSONArray array=object.getJSONArray("Routes");
+                       if(array.length()>0){
+                           list.clear();
+                           for (int i=0;i<array.length();i++){
+                               JSONObject jsonObject = array.getJSONObject(i);
+                               SelectRoutemodel selectRoutemodel = new SelectRoutemodel();
+                               selectRoutemodel.setRouteNumber(jsonObject.getString("RouteNumber"));
+                               selectRoutemodel.setFcmrouteId(jsonObject.getString("FcmRouteId"));
+                               selectRoutemodel.setFullRoute(jsonObject.getString("Route"));
+                               selectRoutemodel.setStartoint(jsonObject.getString("StartPoint"));
+                               selectRoutemodel.setEndpoint(jsonObject.getString("EndPoint"));
+                               selectRoutemodel.setViapoint(jsonObject.getString("ViaPoint"));
+                               list.add(selectRoutemodel);
+
+                           }
+                           Log.d("LISTT",list.toString());
+                           runOnUiThread(new Runnable() {
+                               @Override
+                               public void run() {
+                                   routeselect=new Routeselect(MainActivity.this,list);
+                                   recyclerView.setAdapter(routeselect);
+                               }
+                           });
+                       }
+                   } catch (JSONException e) {
+                       e.printStackTrace();
+                   }
+
+               }
+
+           }
+       });
+    }*/
+
     public void showError() {
         loadToast.error();
-        Snackbar.make(rv, "tryagainlater", Snackbar.LENGTH_INDEFINITE).show();
+        Snackbar.make(rv, "try again later", Snackbar.LENGTH_INDEFINITE).show();
     }
 }
 
