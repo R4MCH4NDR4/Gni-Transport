@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,148 +10,239 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.root.gni_transport.gni.ui.activities.HomeActivity"
     tools:showIn="@layout/app_bar_home">
-    <!--<LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
-        <fragment
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/red"
+            android:text="Notifications"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/white"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/message"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="@string/deletemessage"
+            android:textSize="16sp"/>
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/notice_fragment"
-            android:name="com.example.root.gni_transport.gni.ui.fragments.HomemapFragment"
-            android:layout_margin="10dp">
-        </fragment>
-        <LinearLayout
+            android:gravity="end"
+            android:id="@+id/time"
+            android:textColor="@color/black"
+            android:text="@string/time"
+            android:textSize="16sp"/>
+
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-        <fragment
+            android:layout_height="150dp"
+            android:src="@drawable/bus_front"
+            android:background="@color/cyan"
+            android:contentDescription="TODO" />
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:name="com.example.root.gni_transport.gni.ui.fragments.HomenoticeFragment"
-            android:id="@+id/map_fragment"
-            android:layout_margin="10dp">
-        </fragment>
-        </LinearLayout>
-    </LinearLayout>
---> <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:layout_height="40dp"
+            android:text="@string/route_details"
+            android:gravity="center"
+            android:background="@color/red"
+            android:textColor="@color/white"/>
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:background="@color/cyan"
-                    android:text="@string/updates"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:textColor="@color/white"/>
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:text="@string/title"
-                        android:textSize="18sp"
-                        android:textColor="@color/black"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:id="@+id/title"
-                        android:text="@string/complaint_description"
-                        android:textSize="16sp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
-                </LinearLayout>
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    android:background="@color/blacklow">
-                </View>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:text="@string/subject"
-                        android:textSize="18sp"
-                        android:textColor="@color/black"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/notice"
-                        android:text="@string/complaint_description"
-                        android:textSize="16sp"/>
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/blacklow">
-                </View>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:text="@string/time"
-                        android:textSize="18sp"
-                        android:textColor="@color/black"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:id="@+id/date"
-                        android:text="@string/complaint_description"
-                        android:textSize="16sp"/>
-                </LinearLayout>
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="@color/cyan"
-                    android:text="@string/primaryroute"
-                    android:gravity="center"
-                    android:textSize="20sp"
-                    android:textColor="@color/white"/>
-                <ImageView
-                    android:layout_width="370dp"
-                    android:layout_height="200dp"
-                    android:src="@drawable/bus_front"
-                    android:contentDescription="@string/todo" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/bus_number"
-                        android:textSize="18sp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/busnumber"
-                        android:textSize="18sp"
-                        />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:id="@+id/r1">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_alignParentStart="true"
+                            android:id="@+id/l1"
+                            android:layout_alignParentLeft="true">
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/routenumbertext"
+                                android:textColor="@color/black" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="Number"
+                                android:textSize="15sp"
+                                android:textColor="@color/red"
+                                android:textStyle="bold"
+                                android:id="@+id/routenumber"
+                               />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_below="@+id/l1"
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/startandend">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAllCaps="true"
+                                android:textStyle="bold"
+                                tools:text="ROUTE"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginStart="20dp"
+                                android:textSize="20sp"
+                                android:id="@+id/startpoint"
+                                android:textColor="@color/blue" />
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:src="@drawable/directions"
+                                android:contentDescription="TODO" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAllCaps="true"
+                                android:textStyle="bold"
+                                tools:text="ROUTE"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:textSize="20sp"
+                                android:id="@+id/endpoint"
+                                android:textColor="@color/blue" />
+
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/startandend"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/via"
+                            android:textSize="15sp"
+                            android:id="@+id/viapoint" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/startandend"
+                            tools:text="viaroutes"
+                            android:id="@+id/viapoints"
+                            android:textSize="15sp"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_toEndOf="@+id/v"
+                            android:layout_toRightOf="@+id/v" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_below="@+id/startandend"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:id="@+id/routeimage"
+                            android:src="@drawable/route"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/fcmrouteID"
+                            android:visibility="gone"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:id="@+id/r2">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/fullroute"
+                                android:textSize="15sp"
+                                android:textColor="@color/blue"
+                                android:textAllCaps="true"
+                                android:id="@+id/fullroutetext" />
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@color/blacklow"
+                                android:layout_marginRight="30dp"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/fullroute"
+                                android:textSize="15sp"
+                                android:textColor="@color/red"
+                                tools:text="full route here"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@color/blacklow"
+                                android:layout_marginRight="30dp"/>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="end"
+                                android:gravity="center"
+                                android:id="@+id/googlemaps">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/blue"
+                                        android:text="View On"/>
+                                    <ImageView
+                                        android:layout_width="30dp"
+                                        android:id="@+id/google"
+                                        android:layout_height="30dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginStart="10dp"
+                                        android:src="@drawable/google"/>
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </RelativeLayout>
                 </LinearLayout>
-            </LinearLayout>
+            </android.support.v7.widget.CardView>
         </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

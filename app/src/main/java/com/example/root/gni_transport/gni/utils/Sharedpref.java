@@ -19,6 +19,10 @@ public class Sharedpref {
     public static final String routeFcmId="routeFcmId";
     public static final String Routeselected="Route";
     public static final String RollNumber ="Rollnumber";
+    public static final String fullroute ="fullroute";
+    public static final String startpoint ="startpoint";
+    public static final String endpoint ="endpoint";
+    public static final String viapoint ="viaPoint";
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -55,7 +59,6 @@ public class Sharedpref {
         return decode(value);
     }
     public void setRouteFcmId(String value){
-        Log.d("SHAREDPREFERID",value);
         editor=sharedPreferences.edit();
         editor.putString(routeFcmId,encode(value));
         editor.apply();
@@ -66,13 +69,13 @@ public class Sharedpref {
         return decode(value);
     }
     public void setRoutenumber(String value){
-        Log.d("SHAREDPREFNUMBER",value);
         editor=sharedPreferences.edit();
         editor.putString(routenumber,encode(value));
         editor.apply();
     }
     public  String getRoutenumber() {
         String value=sharedPreferences.getString(routenumber,null);
+        Log.d("GETROUTE",decode(value));
         return decode(value);
     }
 
@@ -98,7 +101,7 @@ public class Sharedpref {
     public void setRollNumber(String roll){
         editor=sharedPreferences.edit();
         editor.putString(RollNumber,encode(roll));
-        editor.commit();
+        editor.apply();
     }
 
     public boolean getRouteselected() {
@@ -108,6 +111,51 @@ public class Sharedpref {
     public void delete(){
         editor=sharedPreferences.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
+    public void setFullroute(String value){
+        Log.d("SETFULLROUTE",value);
+        editor=sharedPreferences.edit();
+        editor.putString(fullroute,encode(value));
+        editor.apply();
+    }
+    public  String getFullroute() {
+        String value=sharedPreferences.getString(fullroute,null);
+        Log.d("GETFULLROUTE",decode(value));
+        return decode(value);
+    }
+    public void setStartpoint(String value){
+        Log.d("SETFULLROUTE",value);
+        editor=sharedPreferences.edit();
+        editor.putString(startpoint,encode(value));
+        editor.apply();
+    }
+    public  String getStartpoint() {
+        String value=sharedPreferences.getString(startpoint,null);
+        Log.d("GETFULLROUTE",decode(value));
+        return decode(value);
+    }
+    public void setEndpoint(String value){
+        Log.d("SETFULLROUTE",value);
+        editor=sharedPreferences.edit();
+        editor.putString(endpoint,encode(value));
+        editor.apply();
+    }
+    public  String getEndpoint() {
+        String value=sharedPreferences.getString(endpoint,null);
+        Log.d("GETFULLROUTE",decode(value));
+        return decode(value);
+    }
+    public void setViapoint(String value){
+        Log.d("SETFULLROUTE",value);
+        editor=sharedPreferences.edit();
+        editor.putString(viapoint,encode(value));
+        editor.apply();
+    }
+    public  String getViapoint() {
+        String value=sharedPreferences.getString(viapoint,null);
+        Log.d("GETFULLROUTE",decode(value));
+        return decode(value);
+    }
+
 }

@@ -40,10 +40,17 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
     @Override
     public void handleResult(Result result) {
             String number=result.getText().toString();
-            sharedpref.setRollNumber(number);
-        Intent intent = new Intent(this,Complaints.class);
-        intent.putExtra("scannervalue",number);
-        startActivity(intent);
+            String ps3= String.valueOf(number.charAt(2));
+            String ps4 = String.valueOf(number.charAt(3));
+            String code= ps3+ps4;
+            String cdata="WJ";
+            if(code.equals(cdata)) {
+                zXingScannerView.stopCamera();
+                sharedpref.setRollNumber(number);
+                Intent intent = new Intent(this, Complaints.class);
+                intent.putExtra("scannervalue", number);
+                startActivity(intent);
+            }
 
     }
 

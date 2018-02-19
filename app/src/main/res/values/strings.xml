@@ -9,14 +9,14 @@
     <string name="fullroute">FullRoute</string>
     <string name="Setasdefaultroute">PrimaryRoute</string>
     <string name="sure">By setting this as your primary route, you will be able to
-    receive update notification for this particular root</string>
+    receive update notification for this particular route</string>
     <string name="proceed">Proceed</string>
     <string name="searcherrorselecting">ErrorSelecting</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
-    <string name="complaint_text">please_tell_your_concer</string>
+    <string name="complaint_text">please tell your concern</string>
     <string name="complaint_title">Complaint Title</string>
     <string name="complaint_description">complaint desccription</string>
 
@@ -55,4 +55,5 @@
     <string name="refresh">refresh</string>
     <string name="phone">phone</string>
     <string name="todo">TODO</string>
+    <string name="route_details">Route details</string>
 </resources>

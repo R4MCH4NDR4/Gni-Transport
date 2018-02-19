@@ -70,6 +70,7 @@ public class Complaints extends AppCompatActivity {
         String url= Contants.complaints;
         AndroidNetworking.post(url)
                 .setPriority(Priority.HIGH)
+                .addBodyParameter("appkey",getString(R.string.Authkey))
                 .addBodyParameter("rollnumber",rollnumber)
                 .addBodyParameter("title",title)
                 .addBodyParameter("subject",subject)

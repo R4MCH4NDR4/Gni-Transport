@@ -15,6 +15,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,9 +25,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.root.gni_transport.R;
 
 import com.example.root.gni_transport.gni.ui.fragments.HomemapFragment;
@@ -37,39 +44,64 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import android.Manifest;
 
-//import static android.Manifest.permission.CALL_PHONE;
+import net.steamcrafted.loadtoast.LoadToast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import static com.example.root.gni_transport.gni.utils.Contants.noticeboard;
+
 
 public class
 HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     @BindView(R.id.relative_lay)RelativeLayout relativeLayout;
-    public static FragmentManager fragmentManager;
-    HomemapFragment homemapFragment;
-    HomenoticeFragment homenoticeFragment;
     Sharedpref sharedpref;
-    public static final String HOME_NOTICE="homenotice";
-    public static final String HOME_MAP="homemap";
+    LoadToast loadToast;
     private static final int PREMESSION_REQUEST_COSE=1;
     public boolean doublepress=false;
-
+    @BindView(R.id.routenumber) TextView routenumber;
+    @BindView(R.id.startpoint) TextView startpoint;
+    @BindView(R.id.endpoint) TextView endpoint;
+    @BindView(R.id.viapoint) TextView viapoint;
+    @BindView(R.id.fullroute) TextView fullroute;
+    @BindView(R.id.message) TextView message;
+    @BindView(R.id.time) TextView time;
+    @BindView(R.id.google) ImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        AndroidNetworking.initialize(getApplicationContext());
         ButterKnife.bind(this);
         sharedpref = new Sharedpref(this);
         sharedpref.setFirstopen();
+        loadToast=new LoadToast(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        routenumber.setText(sharedpref.getRoutenumber());
+        startpoint.setText(sharedpref.getStartpoint());
+        endpoint.setText(sharedpref.getEndpoint());
+        viapoint.setText(sharedpref.getViapoint());
+        fullroute.setText(sharedpref.getFullroute());
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(view.getContext(),RouteMapAtivity.class);
+                startActivity(intent);
+            }
+        });
+        notification();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -79,24 +111,8 @@ HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-       /* if (savedInstanceState == null) {
-            startMainActivity();
-        }else {
-            homenoticeFragment=(HomenoticeFragment)getSupportFragmentManager().getFragment(savedInstanceState,HOME_NOTICE);
-            homemapFragment=(HomemapFragment)getSupportFragmentManager().getFragment(savedInstanceState,HOME_MAP);
-        }*/
     }
 
-   /* @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -117,7 +133,7 @@ HomeActivity extends AppCompatActivity
                     sharedpref.delete();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
-                    //Toast.makeText(getApplicationContext(),"updated soon",Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -160,7 +176,6 @@ HomeActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.all_routes) {
@@ -195,22 +210,7 @@ HomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    /*public void startMainActivity() {
-        homenoticeFragment = new HomenoticeFragment();
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace
-                (R.id.notice_fragment, homenoticeFragment).commit();
-        homemapFragment = new HomemapFragment();
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace
-                (R.id.map_fragment, homemapFragment).commit();
-
-    }*/
-
     public void call() {
-       // Uri phone = Uri.parse("tel:" + "7732041034");
-        //Intent intent = new Intent(Intent.ACTION_CALL, phone);
         if(ActivityCompat.checkSelfPermission(this,Manifest.permission.CALL_PHONE)!=PackageManager.PERMISSION_GRANTED){
             if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.CALL_PHONE)){
                 AlertDialog.Builder builder=new AlertDialog.Builder(this)
@@ -236,23 +236,6 @@ HomeActivity extends AppCompatActivity
         startActivity(intent);
 
     }
-
-   /* @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        getSupportFragmentManager().putFragment(outState,HOME_NOTICE,homenoticeFragment);
-        getSupportFragmentManager().putFragment(outState,HOME_MAP,homemapFragment);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        if(savedInstanceState!=null){
-            homenoticeFragment=(HomenoticeFragment)getSupportFragmentManager().getFragment(savedInstanceState,HOME_NOTICE);
-            homemapFragment=(HomemapFragment)getSupportFragmentManager().getFragment(savedInstanceState,HOME_MAP);
-        }
-    }*/
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode){
@@ -279,5 +262,41 @@ HomeActivity extends AppCompatActivity
             back_pressed = System.currentTimeMillis();
         }
     }
+    private void notification(){
+        String url=noticeboard;
+        AndroidNetworking.post(url)
+                .addBodyParameter("appkey",getString(R.string.Authkey))
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        loadToast.success();
+                        Log.d("RESPONSE",response.toString());
+                        try {
+                            JSONArray array=response.getJSONArray("notice");
+                            if(!response.has("Error")){
+                                JSONObject object=array.getJSONObject(0);
+                                String messag=object.getString("NoticeMessage");
+                                String tim=object.getString("NoticeTimeStamp");
+                                message.setText(messag);
+                                time.setText(tim);
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.d("RESPONCEERROR",anError.toString());
+                        loadToast.error();
+
+                    }
+                });
+    }
+
 
 }

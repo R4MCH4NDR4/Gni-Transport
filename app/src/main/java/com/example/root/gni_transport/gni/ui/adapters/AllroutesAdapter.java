@@ -1,6 +1,8 @@
 package com.example.root.gni_transport.gni.ui.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.root.gni_transport.R;
+import com.example.root.gni_transport.gni.ui.activities.RouteMapAtivity;
 import com.example.root.gni_transport.gni.ui.models.Routeselectmodel;
 
 import java.util.List;
@@ -68,6 +71,11 @@ public class AllroutesAdapter extends RecyclerView.Adapter<AllroutesAdapter.Allr
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(),"soon",Toast.LENGTH_LONG).show();
+               /* String number =holder.routeNumber.getText().toString();
+                Intent intent=new Intent(view.getContext(), RouteMapAtivity.class);
+                intent.putExtra("routenumber",number);
+                view.getContext().startActivity(intent);
+                ((Activity)context).overridePendingTransition(R.anim.slidein, R.anim.slideout);*/
 
             }
         });

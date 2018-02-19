@@ -75,6 +75,14 @@ public class Routeselect extends RecyclerView.Adapter<Routeselect.RouteSelectVie
                      public void onClick(DialogInterface dialogInterface, int i) {
                          String routenumber =holder.routeNumber.getText().toString();
                          String routefcmid = holder.fcmRouteID.getText().toString();
+                         String fullroute = holder.fullRoute.getText().toString();
+                         String startpoint = holder.routeStartPoint.getText().toString();
+                         String endpoint = holder.rouetEndPoint.getText().toString();
+                         String viapoint = holder.viaPoints.getText().toString();
+                         sharedpref.setViapoint(viapoint);
+                         sharedpref.setEndpoint(endpoint);
+                         sharedpref.setStartpoint(startpoint);
+                         sharedpref.setFullroute(fullroute);
                          sharedpref.setRouteFcmId(routefcmid);
                          sharedpref.setRoutenumber(routenumber);
                          sharedpref.setRouteselected();

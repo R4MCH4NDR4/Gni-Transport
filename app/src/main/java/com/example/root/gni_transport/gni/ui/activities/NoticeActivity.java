@@ -73,7 +73,7 @@ public class NoticeActivity extends AppCompatActivity {
         String url= noticeboard;
         String u=noticeboard;
         AndroidNetworking.post(url)
-                //.addBodyParameter("appkey",getString(R.string.Authkey))
+                .addBodyParameter("appkey",getString(R.string.Authkey))
                 .setOkHttpClient(okHttpClient)
                 .setPriority(Priority.HIGH)
                 .build()

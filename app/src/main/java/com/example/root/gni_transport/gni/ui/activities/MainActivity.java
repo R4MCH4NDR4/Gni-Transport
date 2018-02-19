@@ -47,12 +47,11 @@ import okhttp3.Response;
 import static com.example.root.gni_transport.gni.utils.Contants.Allroutes;
 
 public class MainActivity extends AppCompatActivity {
-   /* OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+   OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
             .connectTimeout(100, TimeUnit.SECONDS)
             .readTimeout(100, TimeUnit.SECONDS)
             .writeTimeout(100, TimeUnit.SECONDS)
-            //.addNetworkInterceptor(new GzipRequestInterceptor())
-            .build();*/
+            .build();
     @BindView(R.id.rv)
     RelativeLayout rv;
     @BindView(R.id.route_select_recycle)
@@ -102,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d("ALL_ROUTE_URL", url);
         String u ="http://192.168.0.6/project_php/All_routes.php";
         AndroidNetworking.post(url)
-                .addBodyParameter("Authkey", getString(R.string.Authkey))
-                //.setOkHttpClient(okHttpClient)
+                .addBodyParameter("appkey",getString(R.string.Authkey))
+                .setOkHttpClient(okHttpClient)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
