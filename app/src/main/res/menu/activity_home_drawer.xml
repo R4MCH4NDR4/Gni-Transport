@@ -20,17 +20,13 @@
             android:id="@+id/college_map"
             android:icon="@drawable/google"
             android:title="@string/college_map" />
-        <item
-            android:id="@+id/route_map"
-            android:title="@string/routemap"
-            android:icon="@drawable/route"
-            />
         <item android:id="@+id/bugreport"
             android:title="@string/bugreport"
             android:icon="@drawable/bugreport"
             />
         <item
             android:id="@+id/about"
+            android:icon="@drawable/aboutus"
             android:title="@string/about"
             />
     </group>

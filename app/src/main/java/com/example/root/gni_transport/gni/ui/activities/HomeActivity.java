@@ -194,9 +194,6 @@ HomeActivity extends AppCompatActivity
             Intent intent = new Intent(this, CollegeMap.class);
             startActivity(intent);
 
-        }else if(id==R.id.route_map){
-            //Toast.makeText(getApplicationContext(),"soon",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this,RouteMapAtivity.class));
         }
         else if (id == R.id.about) {
             Toast.makeText(getApplicationContext(),"soon",Toast.LENGTH_SHORT).show();
